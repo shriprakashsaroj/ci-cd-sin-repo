@@ -1,22 +1,22 @@
 version: 0.2
-
 phases:
+  pre_build:
+    commands:
+      - echo "Checking index.html..."
+
   build:
     commands:
-      - echo "Starting Attari Classes CI/CD Build..."
       - |
         if [ ! -f index.html ]; then
-          echo "FAILED: index.html not found!"
+          echo "ERROR: index.html not found!"
           exit 1
         fi
-      - echo "SUCCESS: index.html exists."
       - |
         if ! grep -q "Attari Classes" index.html; then
-          echo "FAILED: Attari Classes text not found!"
+          echo "ERROR: 'Attari Classes' text not found in index.html!"
           exit 1
         fi
-      - echo "SUCCESS: Attari Classes text verified."
-      - echo "Build completed successfully!"
+      - echo "Validation successful."
 
 artifacts:
   files:
